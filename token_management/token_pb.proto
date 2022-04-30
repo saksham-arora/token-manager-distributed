@@ -1,0 +1,34 @@
+syntax = "proto3";
+
+package token_management;
+
+option go_package = "example.com/token_client_server_rpc;token_client_server_rpc";
+
+service TokenManager {
+  rpc CreateNewToken (Token) returns (Response) {}
+  rpc ReadToken (Token) returns (WriteResponse) {}
+  rpc WriteToken (WriteTokenMsg) returns (WriteResponse) {}
+  rpc DropToken (Token) returns (Response) {}
+  // rpc GetTokens (GetTokensParams) returns (TokenList) {}
+}
+
+message Token {
+  int32 id=1;
+  // string name=2;
+  // repeated int32 domain=3;
+  // repeated int32 state=4;
+}
+message WriteTokenMsg {
+  int32 id=1;
+  string name=2;
+  uint64 low=3;
+  uint64 mid=4;
+  uint64 high=5;
+}
+message Response {
+  string create_response=1;
+}
+
+message WriteResponse {
+  uint64 create_write_response=1;
+}
